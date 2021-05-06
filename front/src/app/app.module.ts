@@ -9,6 +9,8 @@ import { ReverseGeocodeAddressComponent } from './reverse-geocode-address/revers
 import { MatFormFieldModule } from '@angular/material/form-field'
 import { MatInputModule } from '@angular/material/input'
 import { MatCardModule } from '@angular/material/card'
+import { MatIconModule } from '@angular/material/icon'
+import { MatToolbarModule } from '@angular/material/toolbar'
 import { FormsModule } from '@angular/forms'
 import { MapComponent } from './map/map.component'
 import { NgxMapboxGLModule } from 'ngx-mapbox-gl';
@@ -27,6 +29,8 @@ import { NgxMapboxGLModule } from 'ngx-mapbox-gl';
     MatFormFieldModule,
     MatInputModule,
     MatCardModule,
+    MatIconModule,
+    MatToolbarModule,
     FormsModule,
     NgxMapboxGLModule.withConfig({
       accessToken: 'pk.eyJ1IjoibWFydGluZmlsbGlhdSIsImEiOiJja29jdzdkMm8wbTFwMm5uMWdoNHhkYzN5In0.JqnjcJ3sQvguHA1tRaNA6A', // Optional, can also be set per map (accessToken input of mgl-map)
