@@ -5,7 +5,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { ReverseGeocodeAddressComponent } from './reverse-geocode-address/reverse-geocode-address.component';
+import { QueryComponent } from './query/query.component';
 import { MatFormFieldModule } from '@angular/material/form-field'
 import { MatInputModule } from '@angular/material/input'
 import { MatCardModule } from '@angular/material/card'
@@ -18,7 +18,7 @@ import { NgxMapboxGLModule } from 'ngx-mapbox-gl';
 @NgModule({
   declarations: [
     AppComponent,
-    ReverseGeocodeAddressComponent,
+    QueryComponent,
     MapComponent
   ],
   imports: [
@@ -32,6 +32,7 @@ import { NgxMapboxGLModule } from 'ngx-mapbox-gl';
     MatIconModule,
     MatToolbarModule,
     FormsModule,
+    MatIconModule,
     NgxMapboxGLModule.withConfig({
       accessToken: 'pk.eyJ1IjoibWFydGluZmlsbGlhdSIsImEiOiJja29jdzdkMm8wbTFwMm5uMWdoNHhkYzN5In0.JqnjcJ3sQvguHA1tRaNA6A', // Optional, can also be set per map (accessToken input of mgl-map)
       geocoderAccessToken: 'TOKEN' // Optional, specify if different from the map access token, can also be set per mgl-geocoder (accessToken input of mgl-geocoder)

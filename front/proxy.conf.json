@@ -6,5 +6,13 @@
     "pathRewrite": {
       "^/reversegeocodingapi": ""
     }
+  },
+  "/api": {
+    "target": "https://back.traefik.me/api/",
+    "secure": true,
+    "changeOrigin": true,
+    "pathRewrite": {
+      "^/api": ""
+    }
   }
 }
