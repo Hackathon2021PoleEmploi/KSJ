@@ -24,9 +24,11 @@ namespace WebApi.Controllers
 
         [HttpGet]
         [Route("Check")]
-        public ActionResult<List<Tree>> Get(double x, double y, int minDistance = 0, int maxDistance = 2000)
+        public ActionResult<List<Tree>> Get(double x, double y, int minDistance = 0, int maxDistance = 2000, string genres = null)
         {
-            return _treeService.Get(x, y, minDistance, maxDistance);
+            string[] myGenres = genres != null ? genres.Split(',').Select(g => g.ToLower()).ToArray() : null;
+
+            return _treeService.Get(x, y, minDistance, maxDistance, myGenres);
         }
 
         [HttpGet("{id:length(24)}", Name = "GetTree")]

@@ -26,7 +26,7 @@ namespace Services
         public Tree Get(string id) =>
             _trees.Find(tree => tree.Id == id).FirstOrDefault();
 
-        public List<Tree> Get(double x, double y, int minDistance = 0, int maxDistance = 2000)
+        public List<Tree> Get(double x, double y, int minDistance = 0, int maxDistance = 2000, string[] genres = null)
         {
             /*IList<FilterDefinition<Tree>> myFilters = new List<FilterDefinition<Tree>>();
 
@@ -38,7 +38,15 @@ namespace Services
 
             var e = BsonDocument.Parse(myQuery);
 
-            return _trees.Find(myQuery).ToList<Tree>();
+            List<Tree> myResult = _trees.Find(myQuery).ToList<Tree>();
+
+            if (genres != null)
+            {
+                return myResult.Where(r => genres.Contains(r.Properties.GenreTitre.ToLower())).ToList<Tree>();
+            } else
+            {
+                return myResult;
+            }
         }
 
         public void Create(Tree tree)
