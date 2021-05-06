@@ -11,6 +11,7 @@ import { MatInputModule } from '@angular/material/input'
 import { MatCardModule } from '@angular/material/card'
 import { MatIconModule } from '@angular/material/icon'
 import { MatToolbarModule } from '@angular/material/toolbar'
+import { MatTooltipModule  } from '@angular/material/tooltip'
 import { FormsModule } from '@angular/forms'
 import { MapComponent } from './map/map.component'
 import { NgxMapboxGLModule } from 'ngx-mapbox-gl';
@@ -31,6 +32,7 @@ import { NgxMapboxGLModule } from 'ngx-mapbox-gl';
     MatCardModule,
     MatIconModule,
     MatToolbarModule,
+    MatTooltipModule,
     FormsModule,
     MatIconModule,
     NgxMapboxGLModule.withConfig({
