@@ -16,7 +16,8 @@ export class ReverseGeocodeAddressComponent implements OnInit {
   }
 
   search() {
-    this.reverseGeocode.findNearAddress(this.address).subscribe((values) => console.log(values))
+    if (this.address.trim().length > 0) {
+      this.reverseGeocode.findNearAddress(this.address).subscribe((values) => console.log(values))
+    }
   }
-
 }

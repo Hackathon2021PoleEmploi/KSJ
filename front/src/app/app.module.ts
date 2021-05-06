@@ -9,6 +9,7 @@ import { ReverseGeocodeAddressComponent } from './reverse-geocode-address/revers
 import { MatFormFieldModule } from '@angular/material/form-field'
 import { MatInputModule } from '@angular/material/input'
 import { MatCardModule } from '@angular/material/card'
+import { FormsModule } from '@angular/forms'
 
 @NgModule({
   declarations: [
@@ -22,7 +23,8 @@ import { MatCardModule } from '@angular/material/card'
     BrowserAnimationsModule,
     MatFormFieldModule,
     MatInputModule,
-    MatCardModule
+    MatCardModule,
+    FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
