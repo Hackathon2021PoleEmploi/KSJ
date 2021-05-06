@@ -41,5 +41,12 @@ namespace WebApi.Controllers
 
             return tree;
         }
+
+        [HttpPost]
+        public ActionResult Post(Tree tree)
+        {
+            _treeService.Create(tree);
+            return Ok();
+        }
     }
 }
