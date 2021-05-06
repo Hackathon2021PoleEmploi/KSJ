@@ -14,6 +14,9 @@ export class ReverseGeocodeAddressComponent implements OnInit {
   constructor(private reverseGeocode: ReverseGeocodingService, private dataService: DataStorageService) { }
 
   ngOnInit(): void {
+    navigator.geolocation.getCurrentPosition((position) => {
+      this.dataService.updateCurrentPosition({x: position.coords.latitude, y: position.coords.longitude});
+    }, (error) => console.log(error));
   }
 
   search() {
