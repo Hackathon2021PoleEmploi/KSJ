@@ -1,7 +1,7 @@
 <mat-card>
   <mat-form-field style="width: 250px;">
     <mat-label>Adresse</mat-label>
-    <input matInput ([ngModel])="address">
+    <input matInput [(ngModel)]="address" (keydown.enter)="search()">
   </mat-form-field>
 
   <button mat-raised-button color="primary" (click)="search()">GO</button>

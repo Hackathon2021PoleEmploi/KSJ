@@ -1,0 +1,10 @@
+{
+  "/reversegeocodingapi": {
+    "target": "https://api-adresse.data.gouv.fr/",
+    "secure": true,
+    "changeOrigin": true,
+    "pathRewrite": {
+      "^/reversegeocodingapi": ""
+    }
+  }
+}

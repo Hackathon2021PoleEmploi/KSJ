@@ -11,7 +11,7 @@ export class ReverseGeocodingService {
 
   findNearAddress(query: string): Observable<FeatureCollection> {
     const params = {q: query.trim().replace(" ", "+")};
-    return this.http.get<FeatureCollection>("https://api-adresse.data.gouv.fr/search/", {params});
+    return this.http.get<FeatureCollection>("/reversegeocodingapi/search/", {params});
   }
 }
 
