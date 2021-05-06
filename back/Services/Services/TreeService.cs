@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using MongoDB.Bson;
 using MongoDB.Driver;
 
 namespace Services
@@ -24,5 +25,20 @@ namespace Services
 
         public Tree Get(string id) =>
             _trees.Find<Tree>(tree => tree.Id == id).FirstOrDefault();
+
+        public List<Tree> Get(double x, double y, int minDistance = 0, int maxDistance = 2000)
+        {
+            /*IList<FilterDefinition<Tree>> myFilters = new List<FilterDefinition<Tree>>();
+
+            myFilters.Add(Builders<Tree>.Filter.Near("geometry", x, y, minDistance, maxDistance));
+
+            return _trees.Find(Builders<Tree>.Filter.And(myFilters)).ToList();*/
+
+            string myQuery = "{ geometry: { $near: { $geometry: { type: 'Point' , coordinates:[ " + x + ", " + y + " ] }, $maxDistance: " + maxDistance + ", $minDistance: " + minDistance + " } } }";
+
+            var e = BsonDocument.Parse(myQuery);
+
+            return _trees.Find(myQuery).ToList<Tree>();
+        }
     }
 }

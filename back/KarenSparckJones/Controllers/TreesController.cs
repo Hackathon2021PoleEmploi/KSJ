@@ -20,9 +20,13 @@ namespace WebApi.Controllers
         }
 
         [HttpGet]
-        public ActionResult<List<Tree>> Get()
+        public ActionResult<List<Tree>> Get() => _treeService.Get();
+
+        [HttpGet]
+        [Route("Check")]
+        public ActionResult<List<Tree>> Get(double x, double y, int minDistance = 0, int maxDistance = 2000)
         {
-            return _treeService.Get();
+            return _treeService.Get(x, y, minDistance, maxDistance);
         }
 
         [HttpGet("{id:length(24)}", Name = "GetTree")]
