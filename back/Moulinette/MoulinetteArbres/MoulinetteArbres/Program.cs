@@ -11,39 +11,61 @@ namespace MoulinetteArbres
         {
             Console.WriteLine("Hello World!");
 
-            List<Feature> resultListeArbres = new List<Feature>();
+            List<Tree> resultListeArbres = new List<Tree>();
             //source region
             string montpellierPath = @"C:\\Users\\StephaneS\\Desktop\\data pollen\\montpellier.json";
 
             string nationalPath = @"C:\\Users\\StephaneS\\Desktop\\data pollen\\national.geojson";
 
             MontpellierRoot resultats =  JsonConvert.DeserializeObject<MontpellierRoot>(File.ReadAllText(montpellierPath));
+            foreach (MontpellierFeature montpellierFeature in resultats.features)
+            {
+                resultListeArbres.Add(ConvertMontpellierToTree(montpellierFeature));
+            }
 
+            //send tree
         }
+        
+        public static Tree ConvertMontpellierToTree(MontpellierFeature montpellierFeature)
+        {
+            Tree tree = new Tree();
 
+            //tree
+            tree.Id = "MTP_" + montpellierFeature.properties.objectid.ToString();
+            tree.Type = "";
+            //property
+            tree.Properties.GenreTitre = montpellierFeature.properties.nom_commun;
+            tree.Properties.GenreFrancais = montpellierFeature.properties.nom_commun;
+            tree.Properties.CodeDept = "34";
+            //geometry
+            tree.Geometry.Type = montpellierFeature.geometry.type;
+            tree.Geometry.Coordinates = montpellierFeature.geometry.coordinates;
+
+            return tree;
+        }
+        
 
         #region GeoJson
         //GeoJson
-        public class Feature
+        public class Tree
         {
-            public string type { get; set; }
-            public Geometry geometry { get; set; }
-            public Properties properties { get; set; }
+            public string Id { get; set; }
+            public string Type { get; set; }
+            public Geometry Geometry { get; set; } = new Geometry();
+            public Properties Properties { get; set; } = new Properties();
         }
 
         public class Properties
         {
-            public string id { get; set; }
-            public string titre { get; set; }
-            public string nom_commun { get; set; }
-            public int circonference { get; set; }
-            public int hauteur { get; set; }
+            public string GenreTitre { get; set; }
+            public string GenreFrancais { get; set; }
+            public string CodeDept { get; set; }
         }
 
         public class Geometry
         {
-            public string type { get; set; }
-            public List<object> coordinates { get; set; }
+            public string Type { get; set; }
+            public List<Double> Coordinates { get; set; }
         }
         #endregion
 
@@ -98,10 +120,5 @@ namespace MoulinetteArbres
             public List<MontpellierFeature> features { get; set; }
         }
         #endregion
-
-
-
-
-
     }
 }
