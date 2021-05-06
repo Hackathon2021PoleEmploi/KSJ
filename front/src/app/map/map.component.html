@@ -1,0 +1,9 @@
+<div style="width: 800px; height: 500px;">
+  <mgl-map
+    [style]="'mapbox://styles/mapbox/streets-v9'"
+    [zoom]="[15]"
+    [center]="[-74.5, 40]"
+    (load)="map = $event"
+  >
+  </mgl-map>
+</div>

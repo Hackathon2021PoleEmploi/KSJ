@@ -11,7 +11,7 @@ export class ReverseGeocodingService {
   constructor(private http: HttpClient) { }
 
   getDomain() {
-    return environment.production ? "http://api-adresse.data.gouv.fr/" : "/reversegeocodingapi/";
+    return environment.production ? "https://api-adresse.data.gouv.fr/" : "/reversegeocodingapi/";
   }
 
   findNearAddress(query: string): Observable<FeatureCollection> {
