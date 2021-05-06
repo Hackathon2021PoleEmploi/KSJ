@@ -44,6 +44,15 @@ namespace WebApi.Controllers
             return tree;
         }
 
+        [HttpGet]
+        [Route("DistinctGenres")]
+        public ActionResult<string[]> GetDistinctGenres()
+        {
+            var genres = _treeService.GetDistinctGenres();
+
+            return genres;
+        }
+
         [HttpPost]
         public ActionResult Post(Tree tree)
         {

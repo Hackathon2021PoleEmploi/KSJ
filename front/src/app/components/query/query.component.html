@@ -4,10 +4,10 @@
       <mat-label>Adresse</mat-label>
       <input matInput [(ngModel)]="address" (keydown.enter)="search()">
     </mat-form-field>
-
+    
     <mat-form-field class="form-field">
-      <mat-label>Vos arbres allergènes</mat-label>
-      <input matInput [(ngModel)]="allergies" (keydown.enter)="search()">
+      <mat-label>Vos arbres allergènes (séparés par des virgules)</mat-label>
+      <input matInput [(ngModel)]="allergies" (ngModelChange)="updateAllergies()">
     </mat-form-field>
 
     <button mat-icon-button class="icon-search green" (click)="search()">
