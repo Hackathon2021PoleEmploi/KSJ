@@ -24,7 +24,7 @@ namespace Services
             _trees.Find(tree => true).ToList();
 
         public Tree Get(string id) =>
-            _trees.Find<Tree>(tree => tree.Id == id).FirstOrDefault();
+            _trees.Find(tree => tree.Id == id).FirstOrDefault();
 
         public List<Tree> Get(double x, double y, int minDistance = 0, int maxDistance = 2000)
         {

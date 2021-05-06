@@ -12,7 +12,10 @@ namespace Services
     public class Properties
     {
         [BsonElement("id")]
-        public int Id { get; set; }
+        public string Id { get; set; }
+
+        [BsonElement("code_dept")]
+        public string CodeDept { get; set; }
 
         [BsonElement("code_insee")]
         public string CodeInsee { get; set; }

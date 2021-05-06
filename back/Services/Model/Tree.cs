@@ -2,9 +2,11 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 using MongoDB.Bson;
 using MongoDB.Bson.Serialization.Attributes;
+using MongoDB.Bson.Serialization.IdGenerators;
 
 namespace Services
 {
@@ -12,7 +14,8 @@ namespace Services
     public class Tree
     {
         [BsonId]
-        [BsonRepresentation(BsonType.ObjectId)]
+        [JsonIgnore]
+        [BsonRepresentation(BsonType.String)]
         public string Id { get; set; }
 
         [BsonElement("type")]
