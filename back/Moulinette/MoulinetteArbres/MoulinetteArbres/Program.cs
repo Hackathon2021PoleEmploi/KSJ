@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using Newtonsoft.Json;
+using System.Net;
 
 namespace MoulinetteArbres
 {
@@ -9,23 +10,35 @@ namespace MoulinetteArbres
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
-
             List<Tree> resultListeArbres = new List<Tree>();
             //source region
-            string montpellierPath = @"C:\\Users\\StephaneS\\Desktop\\data pollen\\montpellier.json";
+            string montpellierPath = @"C:\Users\StephaneS\Desktop\data pollen\montpellier.json";
 
-            string nationalPath = @"C:\\Users\\StephaneS\\Desktop\\data pollen\\national.geojson";
+            string nationalPath = @"C:\Users\StephaneS\Desktop\data pollen\national.geojson";
 
-            MontpellierRoot resultats =  JsonConvert.DeserializeObject<MontpellierRoot>(File.ReadAllText(montpellierPath));
+            MontpellierRoot resultats = JsonConvert.DeserializeObject<MontpellierRoot>(File.ReadAllText(montpellierPath));
             foreach (MontpellierFeature montpellierFeature in resultats.features)
             {
                 resultListeArbres.Add(ConvertMontpellierToTree(montpellierFeature));
             }
 
-            //send tree
+
+            foreach (Tree tree in resultListeArbres)
+            {
+                var httpWebRequest = (HttpWebRequest)WebRequest.Create("https://back.traefik.me:4443/api/trees");
+                httpWebRequest.ContentType = "application/json";
+                httpWebRequest.Method = "POST";
+
+                using (var streamWriter = new StreamWriter(httpWebRequest.GetRequestStream()))
+                {
+                    string json = JsonConvert.SerializeObject(tree);
+
+                    streamWriter.Write(json);
+                }
+                var httpResponse = (HttpWebResponse)httpWebRequest.GetResponse();
+            }
         }
-        
+
         public static Tree ConvertMontpellierToTree(MontpellierFeature montpellierFeature)
         {
             Tree tree = new Tree();
@@ -43,7 +56,7 @@ namespace MoulinetteArbres
 
             return tree;
         }
-        
+
 
         #region GeoJson
         //GeoJson
