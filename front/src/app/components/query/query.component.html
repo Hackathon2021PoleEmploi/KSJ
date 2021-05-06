@@ -6,8 +6,8 @@
     </mat-form-field>
 
     <mat-form-field style="width: 250px;">
-      <mat-label>Vos arbres allergènes</mat-label>
-      <input matInput [(ngModel)]="allergies" (keydown.enter)="search()">
+      <mat-label>Vos arbres allergènes (séparés par des virgules)</mat-label>
+      <input matInput [(ngModel)]="allergies" (ngModelChange)="updateAllergies()">
     </mat-form-field>
 
     <button mat-fab color="primary" (click)="search()">
