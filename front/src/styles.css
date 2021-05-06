@@ -2,6 +2,16 @@
 @import "~mapbox-gl/dist/mapbox-gl.css";
 @import "~@mapbox/mapbox-gl-geocoder/lib/mapbox-gl-geocoder.css";
 
+:host {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica,
+    Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+  font-size: 14px;
+  color: #333;
+  box-sizing: border-box;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
 html,
 body {
   height: 100%;
@@ -11,10 +21,23 @@ body {
   font-family: Roboto, "Helvetica Neue", sans-serif;
 }
 
-.mt10 {
-  margin-top: 10px;
+a.router {
+  display: flex;
+  text-decoration: none;
+  color: unset;
 }
 
-.ml10 {
-  margin-left: 10px;
+.container {
+  display: flex;
+  flex-direction: column;
+  min-height: 100%;
+  height: 100%;
+}
+
+app-home {
+  flex: 1;
+}
+
+app-login {
+  height: 100%;
 }

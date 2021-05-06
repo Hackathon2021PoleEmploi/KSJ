@@ -1,17 +1,21 @@
 <div>
-  <div style="display: flex; flex-direction: row;">
-    <mat-form-field style="width: 250px;">
+  <div class="form">
+    <mat-form-field class="form-field">
       <mat-label>Adresse</mat-label>
       <input matInput [(ngModel)]="address" (keydown.enter)="search()">
     </mat-form-field>
 
-    <mat-form-field style="width: 250px;">
+    <mat-form-field class="form-field">
       <mat-label>Vos arbres allergènes</mat-label>
       <input matInput [(ngModel)]="allergies" (keydown.enter)="search()">
     </mat-form-field>
 
-    <button mat-fab color="primary" (click)="search()">
+    <button mat-icon-button class="icon-search green" (click)="search()">
       <mat-icon>search</mat-icon>
+    </button>
+
+    <button mat-raised-button class="button-search" (click)="search()">
+      Rechercher
     </button>
   </div>
 </div>

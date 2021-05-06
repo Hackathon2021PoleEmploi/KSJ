@@ -1,0 +1,36 @@
+.form {
+    display: flex;
+    align-items: center;
+    text-align: center;
+    padding: 1em 0;
+    justify-content: center;
+}
+
+.form-field {
+    min-width: 150px;
+    padding: 0 1em;
+}
+
+.button-search {
+    display: none;
+}
+
+.icon-search {
+    display: block;
+}
+
+.green {
+  color: lightgreen;
+}
+
+@media screen and (max-width: 426px) {
+    .form {
+        flex-direction: column;
+    }
+    .button-search {
+        display: block;
+    }
+    .icon-search {
+        display: none;
+    }
+}

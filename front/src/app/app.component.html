@@ -1,24 +1,24 @@
-<mat-toolbar class="green">
-    <span>KSJ</span>
+<header>
+    <mat-toolbar class="green-bg">
+        <a class="router" routerLink="/">
+            <span>KSJ</span>
+        </a>
 
-    <!-- This fills the remaining space of the current row -->
-    <span class="fill-remaining-space"></span>
+        <!-- This fills the remaining space of the current row -->
+        <span class="fill-remaining-space"></span>
 
-    <span class="material-icons" matTooltip="Signalez un nouvel arbre">
-        report_gmailerrorred
-    </span>
+        <a class="router" routerLink="/">
+            <span class="material-icons" matTooltip="Signalez un nouvel arbre">
+                report_gmailerrorred
+            </span>
+        </a>
 
-    <span class="material-icons" matTooltip="Connectez-vous">
-        person
-    </span>
-</mat-toolbar>
-
-<div class="paragraphe">
-    <h1>Mon super titre</h1>
-    Un super paragraphe expliquant le projet.
-</div>
-
-<div>
-    <app-query></app-query>
-    <app-map></app-map>
-</div>
+        <a class="router" routerLink="/login">
+            <span class="material-icons" matTooltip="Connectez-vous">
+                person
+            </span>
+        </a>
+    </mat-toolbar>
+</header>
+<router-outlet></router-outlet>
+<footer>Made with ❤️ in Montpellier</footer>

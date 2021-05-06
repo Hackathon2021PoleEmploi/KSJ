@@ -12,15 +12,20 @@ import { MatCardModule } from '@angular/material/card'
 import { MatIconModule } from '@angular/material/icon'
 import { MatToolbarModule } from '@angular/material/toolbar'
 import { MatTooltipModule  } from '@angular/material/tooltip'
-import { FormsModule } from '@angular/forms'
+import { MatButtonModule } from '@angular/material/button'
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MapComponent } from './map/map.component'
 import { NgxMapboxGLModule } from 'ngx-mapbox-gl';
+import { LoginComponent } from './login/login.component';
+import { HomeComponent } from './home/home.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     QueryComponent,
-    MapComponent
+    MapComponent,
+    LoginComponent,
+    HomeComponent
   ],
   imports: [
     BrowserModule,
@@ -33,7 +38,9 @@ import { NgxMapboxGLModule } from 'ngx-mapbox-gl';
     MatIconModule,
     MatToolbarModule,
     MatTooltipModule,
+    MatButtonModule,
     FormsModule,
+    ReactiveFormsModule,
     MatIconModule,
     NgxMapboxGLModule.withConfig({
       accessToken: 'pk.eyJ1IjoibWFydGluZmlsbGlhdSIsImEiOiJja29jdzdkMm8wbTFwMm5uMWdoNHhkYzN5In0.JqnjcJ3sQvguHA1tRaNA6A', // Optional, can also be set per map (accessToken input of mgl-map)

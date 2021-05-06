@@ -13,8 +13,8 @@ export class MapComponent implements OnInit {
   ngOnInit() {
     this.dataService.currentPosition.subscribe((value) => {
       if (value.x > 0 && value.y > 0) {
-        this.map.setCenter({lat: value.x, lng: value.y})
-        //this.map.addSource("trees", {})
+        this.map.setCenter({lat: value.x, lng: value.y});
+        //this.map.addSource("trees", {});
       }
     })
   }
