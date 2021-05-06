@@ -49,6 +49,9 @@ namespace Services
             }
         }
 
+        public string[] GetDistinctGenres() =>
+            _trees.Distinct(tree => tree.Properties.GenreTitre, new BsonDocument()).ToList().ToArray();
+
         public void Create(Tree tree)
         {
             _trees.InsertOne(tree);
