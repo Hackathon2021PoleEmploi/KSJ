@@ -40,5 +40,10 @@ namespace Services
 
             return _trees.Find(myQuery).ToList<Tree>();
         }
+
+        public void Create(Tree tree)
+        {
+            _trees.InsertOne(tree);
+        }
     }
 }
