@@ -14,7 +14,6 @@ namespace Services
     public class Tree
     {
         [BsonId]
-        [JsonIgnore]
         [BsonRepresentation(BsonType.String)]
         public string Id { get; set; }
 
