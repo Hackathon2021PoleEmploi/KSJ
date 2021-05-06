@@ -3,13 +3,14 @@ import { DataStorageService } from '../services/data-storage.service';
 import { ReverseGeocodingService } from '../services/reverse-geocoding.service';
 
 @Component({
-  selector: 'app-reverse-geocode-address',
-  templateUrl: './reverse-geocode-address.component.html',
-  styleUrls: ['./reverse-geocode-address.component.css']
+  selector: 'app-query',
+  templateUrl: './query.component.html',
+  styleUrls: ['./query.component.css']
 })
-export class ReverseGeocodeAddressComponent implements OnInit {
+export class QueryComponent implements OnInit {
 
   address: string = "";
+  allergies: string = "";
 
   constructor(private reverseGeocode: ReverseGeocodingService, private dataService: DataStorageService) { }
 
