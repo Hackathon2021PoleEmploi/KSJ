@@ -13,8 +13,8 @@ services:
       - "traefik.http.routers.traefik-tls.tls.domains[0].sans=traefik-*.traefik.me"
       - "traefik.http.services.traefik.loadbalancer.server.port=8080"
     volumes:
-      - "./config/dev/traefik.yml:/etc/traefik/traefik.yml"
-      - "./config/dev/tls.yml:/etc/traefik/tls.yml"
+      - "./config/traefik.yml:/etc/traefik/traefik.yml"
+      - "./config/tls.yml:/etc/traefik/tls.yml"
       - "/var/run/docker.sock:/var/run/docker.sock"
       - "certs:/etc/ssl/traefik"
 
@@ -27,7 +27,7 @@ services:
     ports:
       - 27017:27017
     volumes:
-      - ./mongo:/data/db
+      - ./mongodata:/data/db
     labels:
       - "traefik.enable=false"
 
@@ -44,7 +44,8 @@ services:
 
   front:
     build: 
-      context: "angular.Dockerfile"
+      context: "."
+      dockerfile: "angular.Dockerfile"
     restart: "unless-stopped"
     labels:
       # the most import label to tell traefik that it should pick up this service
@@ -55,7 +56,7 @@ services:
       - "traefik.http.services.front.loadbalancer.server.port=3000"
 
   reverse-proxy-https-helper-dev:
-    image: alpine
+    image: alpine:3.9.2
     command: sh -c "cd /etc/ssl/traefik
       && wget traefik.me/cert.pem -O cert.pem
       && wget traefik.me/privkey.pem -O privkey.pem"
