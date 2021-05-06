@@ -12,7 +12,7 @@ const currentPositionAsFeatColl = (x: number, y: number): FeatureCollection => {
       { "type": "Feature",
         "geometry": {
           "type": "Point",
-          "coordinates": [x, y]
+          "coordinates": [y, x]
         },
         "properties": {
           "prop0": "value0"
