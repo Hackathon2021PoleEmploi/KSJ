@@ -1,0 +1,68 @@
+version: "3.8"
+services:
+  traefik:
+    restart: "unless-stopped"
+    image: "traefik:v2.2"
+    ports:
+      - "80:80"
+      - "443:443"
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.traefik.rule=Host(`traefik.traefik.me`)"
+      - "traefik.http.routers.traefik-tls.tls.domains[0].main=traefik.traefik.me"
+      - "traefik.http.routers.traefik-tls.tls.domains[0].sans=traefik-*.traefik.me"
+      - "traefik.http.services.traefik.loadbalancer.server.port=8080"
+    volumes:
+      - "./config/dev/traefik.yml:/etc/traefik/traefik.yml"
+      - "./config/dev/tls.yml:/etc/traefik/tls.yml"
+      - "/var/run/docker.sock:/var/run/docker.sock"
+      - "certs:/etc/ssl/traefik"
+
+  mongodb:
+    image: mongo:latest
+    restart: "unless-stopped"
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: rootpassword
+    ports:
+      - 27017:27017
+    volumes:
+      - ./mongo:/data/db
+    labels:
+      - "traefik.enable=false"
+
+#   api:
+#     build: "services/api/."
+#     restart: "unless-stopped"
+#     labels:
+#       # the most import label to tell traefik that it should pick up this service
+#       - "traefik.enable=true"
+#       - "traefik.http.routers.api.rule=Host(`api.traefik.me`)"
+#       - "traefik.http.routers.api-tls.tls.domains[0].main=api.traefik.me"
+#       - "traefik.http.routers.api-tls.tls.domains[0].sans=api-*.traefik.me"
+#       - "traefik.http.services.api.loadbalancer.server.port=8080"
+
+  front:
+    build: 
+      context: "angular.Dockerfile"
+    restart: "unless-stopped"
+    labels:
+      # the most import label to tell traefik that it should pick up this service
+      - "traefik.enable=true"
+      - "traefik.http.routers.front.rule=Host(`front.traefik.me`)"
+      - "traefik.http.routers.front-tls.tls.domains[0].main=front.traefik.me"
+      - "traefik.http.routers.front-tls.tls.domains[0].sans=front-*.traefik.me"
+      - "traefik.http.services.front.loadbalancer.server.port=3000"
+
+  reverse-proxy-https-helper-dev:
+    image: alpine
+    command: sh -c "cd /etc/ssl/traefik
+      && wget traefik.me/cert.pem -O cert.pem
+      && wget traefik.me/privkey.pem -O privkey.pem"
+    volumes:
+      - "certs:/etc/ssl/traefik"
+    labels:
+      - "traefik.enable=false"
+
+volumes:
+  certs:
