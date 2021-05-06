@@ -24,10 +24,12 @@ services:
     environment:
       MONGO_INITDB_ROOT_USERNAME: root
       MONGO_INITDB_ROOT_PASSWORD: rootpassword
+      MONGO_INITDB_DATABASE: KSJ
     ports:
       - 27017:27017
     volumes:
       - ./mongodata:/data/db
+      - ./mongo-init.js:/docker-entrypoint-initdb.d/mongo-init.js:ro
     labels:
       - "traefik.enable=false"
 
@@ -42,7 +44,7 @@ services:
       - "traefik.http.routers.back.rule=Host(`back.traefik.me`)"
       - "traefik.http.routers.back-tls.tls.domains[0].main=back.traefik.me"
       - "traefik.http.routers.back-tls.tls.domains[0].sans=back-*.traefik.me"
-      - "traefik.http.services.back.loadbalancer.server.port=80"
+      - "traefik.http.services.back.loadbalancer.server.port=4000"
 
   front:
     build: 
