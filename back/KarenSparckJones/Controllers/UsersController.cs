@@ -6,7 +6,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Services;
 
-namespace KarenSparckJones.Controllers
+namespace WebApi.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]

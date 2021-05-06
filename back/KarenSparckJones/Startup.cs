@@ -34,6 +34,7 @@ namespace KarenSparckJones
                 sp.GetRequiredService<IOptions<MongoDBConfiguration>>().Value);
 
             services.AddSingleton<UserService>();
+            services.AddSingleton<TreeService>();
 
             services.AddControllers();
             services.AddSwaggerGen(c =>
