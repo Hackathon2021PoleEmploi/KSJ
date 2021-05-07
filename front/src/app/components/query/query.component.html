@@ -5,16 +5,38 @@
       <input matInput [(ngModel)]="address" (keydown.enter)="search()">
     </mat-form-field>
 
-    <mat-form-field class="form-field">
-      <mat-label>Vos arbres allergènes (séparés par des virgules)</mat-label>
-      <input matInput [(ngModel)]="allergies" (ngModelChange)="updateAllergies()">
+    <mat-form-field class="example-chip-list">
+      <mat-label>Vos arbres allergènes</mat-label>
+      <mat-chip-list #chipList>
+        <mat-chip
+          *ngFor="let fruit of fruits"
+          [selectable]="selectable"
+          [removable]="removable"
+          (removed)="remove(fruit)">
+          {{fruit}}
+          <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
+        </mat-chip>
+        <input
+          placeholder="New fruit..."
+          #fruitInput
+          [formControl]="fruitCtrl"
+          [matAutocomplete]="auto"
+          [matChipInputFor]="chipList"
+          [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+          (matChipInputTokenEnd)="add($event)">
+      </mat-chip-list>
+      <mat-autocomplete #auto="matAutocomplete" (optionSelected)="selected($event)">
+        <mat-option *ngFor="let a of genres$ | async" [value]="a">
+          {{a}}
+        </mat-option>
+      </mat-autocomplete>
     </mat-form-field>
 
-    <button mat-icon-button class="icon-search green" (click)="search()">
+    <button mat-icon-button class="icon-search green" (click)="find()">
       <mat-icon>search</mat-icon>
     </button>
 
-    <button mat-raised-button class="button-search" (click)="search()">
+    <button mat-raised-button class="button-search" (click)="find()">
       Rechercher
     </button>
   </div>

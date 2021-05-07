@@ -34,7 +34,7 @@ export class MapComponent implements OnInit {
 
   constructor(private store: Store<any>) {  // XXX TODO type
       this.currentUserPosition$ = store.select((s) => s.user.position)
-    }
+  }
 
   ngOnInit() {
     this.currentUserPosition$.subscribe((value) => {

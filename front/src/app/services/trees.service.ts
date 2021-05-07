@@ -12,9 +12,14 @@ export class TreesService {
     return environment.production ? "https://back.traefik.me/api/" : "/api/";
   }
 
-  findNearCoords(xn: number, yn: number) {
-    const params = {x: xn.toString(), y: yn.toString()};
-    return this.http.get<any>(`${this.getDomain()}Check`, {params});
+  findNearCoords(xn: number, yn: number, genres: string) {
+    const params = {x: xn.toString(), y: yn.toString(), genres};
+    return this.http.get<any>(`${this.getDomain()}Trees/Check`, {params});
   }
+
+  getTopGenres() {
+    return this.http.get<string[]>(`${this.getDomain()}Trees/DistinctGenres`);
+  }
+
 }
 
