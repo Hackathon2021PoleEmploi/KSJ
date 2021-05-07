@@ -4,6 +4,7 @@ import { FeatureCollection } from 'geojson';
 import * as mapboxgl from 'mapbox-gl';
 import { Observable } from 'rxjs';
 import { IUserPosition } from 'src/app/types/position';
+import * as turf from "@turf/turf";
 
 const currentPositionAsFeatColl = (x: number, y: number): FeatureCollection => {
   return {
@@ -42,6 +43,10 @@ export class MapComponent implements OnInit {
   trees: FeatureCollection | undefined;
   selectedTree: string | undefined = undefined;
   cursorStyle = "";
+  boundingBox: any;
+  fitBoundsOptions = {
+    padding: 100,
+  };
 
   constructor(private store: Store<any>) {  // XXX TODO type
       this.currentUserPosition$ = store.select((s) => s.user.position)
@@ -56,7 +61,10 @@ export class MapComponent implements OnInit {
       }
     })
     this.currentTrees$.subscribe((trees) => {
-      this.trees = treesAsFeatColl(trees);
+      const coll = treesAsFeatColl(trees);
+      this.trees = coll;
+      this.boundingBox = turf.bbox(turf.featureCollection(coll));
+
     })
   }
 
