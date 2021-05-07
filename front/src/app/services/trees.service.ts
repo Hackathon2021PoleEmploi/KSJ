@@ -13,7 +13,7 @@ export class TreesService {
   }
 
   findNearCoords(xn: number, yn: number, genres: string) {
-    const params = {x: xn.toString(), y: yn.toString(), genres};
+    const params = {x: xn.toString(), y: yn.toString(), genres, maxDistance: "1000"};
     return this.http.get<any>(`${this.getDomain()}Trees/Check`, {params});
   }
 

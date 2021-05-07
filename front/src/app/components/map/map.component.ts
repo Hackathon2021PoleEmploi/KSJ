@@ -40,6 +40,8 @@ export class MapComponent implements OnInit {
   currentTrees$: Observable<any>;
   userPosition: FeatureCollection | undefined;
   trees: FeatureCollection | undefined;
+  selectedTree: string | undefined = undefined;
+  cursorStyle = "";
 
   constructor(private store: Store<any>) {  // XXX TODO type
       this.currentUserPosition$ = store.select((s) => s.user.position)
@@ -56,5 +58,12 @@ export class MapComponent implements OnInit {
     this.currentTrees$.subscribe((trees) => {
       this.trees = treesAsFeatColl(trees);
     })
+  }
+
+  onPointClick(evt: mapboxgl.MapLayerMouseEvent) {
+    // don't select the user address
+    if (evt && evt.features && evt.features.length > 0 && evt.features![0].properties) {
+        this.selectedTree = evt.features[0].properties.genreTitre;
+    }
   }
 }

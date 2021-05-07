@@ -4,6 +4,7 @@
     [zoom]="[12]"
     [center]="[3.87048, 43.610476]"
     (load)="map = $event"
+    [cursorStyle]="cursorStyle"
   >
     <mgl-geojson-source
         id="user-position"
@@ -34,7 +35,13 @@
             'circle-color': 'green',
             'circle-radius': 5
         }"
+        (click)="onPointClick($event)"
+        (mouseEnter)="cursorStyle = 'pointer'"
+        (mouseLeave)="cursorStyle = ''"
     >
     </mgl-layer>
   </mgl-map>
+  <div class="mt10" *ngIf="selectedTree">
+    {{ selectedTree }}
+  </div>
 </div>
