@@ -50,7 +50,7 @@ export class MapComponent implements OnInit {
 
   ngOnInit() {
     this.currentUserPosition$.subscribe((value) => {
-      if (value.lat > 0 && value.lon > 0) {
+      if (this.map && value.lat > 0 && value.lon > 0) {
         this.map.setCenter({lat: value.lat, lng: value.lon})
         this.userPosition = currentPositionAsFeatColl(value.lat, value.lon);
       }

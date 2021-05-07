@@ -1,10 +1,11 @@
 import { Injectable } from '@angular/core';
-import { Actions, ofType, createEffect, concatLatestFrom } from '@ngrx/effects';
+import { Actions, ofType, createEffect } from '@ngrx/effects';
 import { of } from 'rxjs';
-import { catchError, exhaustMap, map, mergeMap, tap, withLatestFrom } from 'rxjs/operators';
+import { catchError, exhaustMap, map, mapTo, mergeMap, withLatestFrom } from 'rxjs/operators';
 import { topGenres, topGenresFail, topGenresSuccess, nearestTrees, nearestTreesFail, nearestTreesSuccess } from "../actions/tree.actions"
 import { TreesService } from 'src/app/services/trees.service';
 import { Store } from '@ngrx/store';
+import { updatePosition } from '../actions/user.actions';
 
 @Injectable()
 export class TreesEffects {
@@ -39,6 +40,12 @@ export class TreesEffects {
               );
           })
     ));
+
+    getNearestTreesAfterGeocoding = createEffect(() =>
+          this.actions$.pipe(
+            ofType(updatePosition),
+            mapTo(nearestTrees())
+          ));
 
   constructor(
     private actions$: Actions,
