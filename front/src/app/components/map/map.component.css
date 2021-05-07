@@ -6,3 +6,10 @@ mgl-map {
 .map {
   height: 55vh;
 }
+
+.center {
+  text-align: center;
+  margin: 1em;
+  font-size: 1.25em;
+  font-style: italic;
+}

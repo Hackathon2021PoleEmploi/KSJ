@@ -41,6 +41,7 @@ services:
     labels:
       # the most import label to tell traefik that it should pick up this service
       - "traefik.enable=true"
+      - "traefik.http.middlewares.secHeaders.headers.accesscontrolallowheaders=*"
       - "traefik.http.routers.back.rule=Host(`back.traefik.me`)"
       - "traefik.http.routers.back-tls.tls.domains[0].main=back.traefik.me"
       - "traefik.http.routers.back-tls.tls.domains[0].sans=back-*.traefik.me"
@@ -54,11 +55,11 @@ services:
     labels:
       # the most import label to tell traefik that it should pick up this service
       - "traefik.enable=true"
+      - "traefik.http.middlewares.secHeaders.headers.accesscontrolallowheaders=*"
       - "traefik.http.routers.front.rule=Host(`front.traefik.me`)"
       - "traefik.http.routers.front-tls.tls.domains[0].main=front.traefik.me"
       - "traefik.http.routers.front-tls.tls.domains[0].sans=front-*.traefik.me"
       - "traefik.http.services.front.loadbalancer.server.port=3000"
-      - "traefik.http.middlewares.secHeaders.headers.accesscontrolallowheaders=*"
 
   reverse-proxy-https-helper-dev:
     image: alpine:3.9.2
