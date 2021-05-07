@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { FormControl, FormGroup, FormGroupDirective, NgForm, Validators } from '@angular/forms';
 import { ErrorStateMatcher } from '@angular/material/core';
+import { Store } from '@ngrx/store';
+import { Observable } from 'rxjs';
 
 /** Error when invalid control is dirty, touched, or submitted. */
 export class MyErrorStateMatcher implements ErrorStateMatcher {
@@ -17,7 +19,11 @@ export class MyErrorStateMatcher implements ErrorStateMatcher {
 })
 export class AlertComponent {
 
-  constructor() { }
+  genres$: Observable<string[]>;
+  
+  constructor(private store: Store<any>) { 
+    this.genres$ = store.select((s) => s.trees.topGenres);
+  }
 
   latitudeFormControl = new FormControl('', [
     Validators.required,

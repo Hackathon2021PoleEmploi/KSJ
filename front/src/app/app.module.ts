@@ -14,6 +14,8 @@ import { MatToolbarModule } from '@angular/material/toolbar'
 import { MatTooltipModule  } from '@angular/material/tooltip'
 import { MatButtonModule } from '@angular/material/button'
 import { MatSelectModule } from '@angular/material/select'
+import { MatChipsModule } from '@angular/material/chips'
+import { MatAutocompleteModule } from '@angular/material/autocomplete'
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { LoginComponent } from './components/login/login.component';
 import { HomeComponent } from './components/home/home.component';
@@ -26,6 +28,8 @@ import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { EffectsModule } from '@ngrx/effects';
 import { GeocodingEffects } from './store/effects/geocoding.effects';
 import { NotfoundComponent } from './components/notfound/notfound.component';
+import { TreesEffects } from './store/effects/trees.effects';
+import { treesReducer } from './store/reducers/trees.reducer';
 
 @NgModule({
   declarations: [
@@ -53,12 +57,14 @@ import { NotfoundComponent } from './components/notfound/notfound.component';
     FormsModule,
     ReactiveFormsModule,
     MatIconModule,
+    MatChipsModule,
+    MatAutocompleteModule,
     NgxMapboxGLModule.withConfig({
       accessToken: 'pk.eyJ1IjoibWFydGluZmlsbGlhdSIsImEiOiJja29jdzdkMm8wbTFwMm5uMWdoNHhkYzN5In0.JqnjcJ3sQvguHA1tRaNA6A', // Optional, can also be set per map (accessToken input of mgl-map)
       geocoderAccessToken: 'TOKEN' // Optional, specify if different from the map access token, can also be set per mgl-geocoder (accessToken input of mgl-geocoder)
     }),
-    StoreModule.forRoot({user: userReducer}),
-    EffectsModule.forRoot([GeocodingEffects]),  // XXX TODO root list effects
+    StoreModule.forRoot({user: userReducer, trees: treesReducer}),
+    EffectsModule.forRoot([GeocodingEffects, TreesEffects]),  // XXX TODO root list effects
     StoreDevtoolsModule.instrument()  // XXX TODO disable in prod
   ],
   providers: [],

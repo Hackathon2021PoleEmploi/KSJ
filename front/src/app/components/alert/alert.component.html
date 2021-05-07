@@ -27,9 +27,9 @@
 
         <mat-form-field class="full-width">
             <mat-select placeholder="Arbre à signaler">
-                <!-- <mat-option *ngFor="let tree of trees" [value]="tree.value">
-                    {{ tree.name }}
-                </mat-option> -->
+                <mat-option *ngFor="let tree of genres$ | async" [value]="tree">
+                    {{ tree }}
+                </mat-option>
             </mat-select>
         </mat-form-field>
 
