@@ -15,15 +15,34 @@ namespace MoulinetteArbres
             string montpellierPath = @"C:\Users\StephaneS\Desktop\data pollen\montpellier.json";
 
             string nationalPath = @"C:\Users\StephaneS\Desktop\data pollen\national.geojson";
-
+            /*
             MontpellierRoot resultats = JsonConvert.DeserializeObject<MontpellierRoot>(File.ReadAllText(montpellierPath));
             foreach (MontpellierFeature montpellierFeature in resultats.features)
             {
-                resultListeArbres.Add(ConvertMontpellierToTree(montpellierFeature));
+                if (montpellierFeature.properties.nom_commun != null)
+                {
+
+                    resultListeArbres.Add(ConvertMontpellierToTree(montpellierFeature));
+                }
+            }
+            */
+
+            //mapping arbres nationa
+            NationRoot resultatsNationaux = JsonConvert.DeserializeObject<NationRoot>(File.ReadAllText(nationalPath));
+            foreach (NationFeature nationFeature in resultatsNationaux.features)
+            {
+                if (nationFeature.properties.genre_francais != null && nationFeature.properties.code_dept == "34")
+                {
+                    resultListeArbres.Add(ConvertNationalToTree(nationFeature));
+                }
             }
 
+            ExportTree(resultListeArbres);
+        }
 
-            foreach (Tree tree in resultListeArbres)
+        public static void ExportTree(List<Tree> someTree)
+        {
+            foreach (Tree tree in someTree)
             {
                 var httpWebRequest = (HttpWebRequest)WebRequest.Create("https://back.traefik.me:4443/api/trees");
                 httpWebRequest.ContentType = "application/json";
@@ -39,10 +58,26 @@ namespace MoulinetteArbres
             }
         }
 
+        public static Tree ConvertNationalToTree(NationFeature nationFeature)
+        {
+            Tree tree = new Tree();
+            //tree
+            tree.Id = "NAT_" + nationFeature.properties.id;
+            tree.Type = "";
+            //property
+            tree.Properties.GenreTitre = nationFeature.properties.genre_francais;
+            tree.Properties.GenreFrancais = nationFeature.properties.genre_francais;
+            tree.Properties.CodeDept = "34";
+            //geometry
+            tree.Geometry.Type = nationFeature.geometry.type;
+            tree.Geometry.Coordinates = nationFeature.geometry.coordinates;
+
+            return tree;
+        }
+
         public static Tree ConvertMontpellierToTree(MontpellierFeature montpellierFeature)
         {
             Tree tree = new Tree();
-
             //tree
             tree.Id = "MTP_" + montpellierFeature.properties.objectid.ToString();
             tree.Type = "";
@@ -52,14 +87,16 @@ namespace MoulinetteArbres
             tree.Properties.CodeDept = "34";
             //geometry
             tree.Geometry.Type = montpellierFeature.geometry.type;
+            var any = montpellierFeature.geometry.coordinates;
             tree.Geometry.Coordinates = montpellierFeature.geometry.coordinates;
+            tree.Geometry.Coordinates.Reverse();
 
             return tree;
         }
 
 
         #region GeoJson
-        //GeoJson
+        //source region 
         public class Tree
         {
             public string Id { get; set; }
@@ -131,6 +168,52 @@ namespace MoulinetteArbres
             public string name { get; set; }
             public MontpellierCrs crs { get; set; }
             public List<MontpellierFeature> features { get; set; }
+        }
+        #endregion
+
+        #region Source Nation
+        // Root myDeserializedClass = JsonConvert.DeserializeObject<Root>(myJsonResponse); 
+        public class NationProperties
+        {
+            public string name { get; set; }
+            public int id { get; set; }
+            public string id_source { get; set; }
+            public int source_id { get; set; }
+            public double x { get; set; }
+            public double y { get; set; }
+            public string code_dept { get; set; }
+            public string code_insee { get; set; }
+            public string code_iris { get; set; }
+            public string genre_francais { get; set; }
+            public object genre_latin { get; set; }
+            public object hauteur { get; set; }
+            public object categorie_hauteur { get; set; }
+        }
+
+        public class NationCrs
+        {
+            public string type { get; set; }
+            public Properties properties { get; set; }
+        }
+
+        public class NationGeometry
+        {
+            public string type { get; set; }
+            public List<double> coordinates { get; set; }
+        }
+
+        public class NationFeature
+        {
+            public string type { get; set; }
+            public NationProperties properties { get; set; }
+            public NationGeometry geometry { get; set; }
+        }
+
+        public class NationRoot
+        {
+            public string type { get; set; }
+            public NationCrs crs { get; set; }
+            public List<NationFeature> features { get; set; }
         }
         #endregion
     }
