@@ -8,7 +8,7 @@
     }
   },
   "/api": {
-    "target": "https://back.traefik.me/api/",
+    "target": "http://back.traefik.me/api/",
     "secure": true,
     "changeOrigin": true,
     "pathRewrite": {

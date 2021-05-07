@@ -54,7 +54,7 @@ export class MapComponent implements OnInit {
       }
     })
     this.currentTrees$.subscribe((trees) => {
-      this.trees = trees;
+      this.trees = treesAsFeatColl(trees);
     })
   }
 }
