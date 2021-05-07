@@ -1,15 +1,17 @@
 import { createReducer, on } from '@ngrx/store';
-import { topGenres, topGenresFail, topGenresSuccess } from "../actions/tree.actions"
+import { Feature } from 'geojson';
+import { topGenres, topGenresFail, topGenresSuccess, nearestTreesSuccess } from "../actions/tree.actions"
 
-type State = {topGenres: string[], fetchingTopGenres: boolean};
+type State = {topGenres: string[], fetchingTopGenres: boolean, trees: Array<Feature>};
 
-export const initialState: State = {topGenres: [], fetchingTopGenres: false};
+export const initialState: State = {topGenres: [], fetchingTopGenres: false, trees: []};
 
 const _treesReducer = createReducer(
   initialState,
   on(topGenres, (state, _) => {return {...state, fetchingTopGenres: true}}),
   on(topGenresSuccess, (state, action) => {return {...state, fetchingTopGenres: false, topGenres: action.results}}),
-  on(topGenresFail, (state, _) => {return {...state, fetchingTopGenres: false}})
+  on(topGenresFail, (state, _) => {return {...state, fetchingTopGenres: false}}),
+  on(nearestTreesSuccess, (state, action) => {return {...state, trees: action.trees}})
 );
 
 export const treesReducer = (state, action) => {

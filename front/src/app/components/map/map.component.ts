@@ -22,6 +22,13 @@ const currentPositionAsFeatColl = (x: number, y: number): FeatureCollection => {
   };
 }
 
+const treesAsFeatColl = (payload: any): FeatureCollection => {
+  return {
+    type: 'FeatureCollection',
+    "features": payload
+  };
+}
+
 @Component({
   selector: 'app-map',
   templateUrl: './map.component.html',
@@ -30,10 +37,13 @@ const currentPositionAsFeatColl = (x: number, y: number): FeatureCollection => {
 export class MapComponent implements OnInit {
   map!: mapboxgl.Map;
   currentUserPosition$: Observable<IUserPosition>;
+  currentTrees$: Observable<any>;
   userPosition: FeatureCollection | undefined;
+  trees: FeatureCollection | undefined;
 
   constructor(private store: Store<any>) {  // XXX TODO type
       this.currentUserPosition$ = store.select((s) => s.user.position)
+      this.currentTrees$ = store.select((s) => s.trees.trees)
   }
 
   ngOnInit() {
@@ -42,6 +52,9 @@ export class MapComponent implements OnInit {
         this.map.setCenter({lat: value.lat, lng: value.lon})
         this.userPosition = currentPositionAsFeatColl(value.lat, value.lon);
       }
+    })
+    this.currentTrees$.subscribe((trees) => {
+      this.trees = trees;
     })
   }
 }
