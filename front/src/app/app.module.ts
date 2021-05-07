@@ -21,6 +21,8 @@ import { NgxMapboxGLModule } from 'ngx-mapbox-gl';
 import { StoreModule } from '@ngrx/store';
 import { userReducer } from './store/reducers/user.reducer';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
+import { EffectsModule } from '@ngrx/effects';
+import { GeocodingEffects } from './store/effects/geocoding.effects';
 
 @NgModule({
   declarations: [
@@ -50,6 +52,7 @@ import { StoreDevtoolsModule } from '@ngrx/store-devtools';
       geocoderAccessToken: 'TOKEN' // Optional, specify if different from the map access token, can also be set per mgl-geocoder (accessToken input of mgl-geocoder)
     }),
     StoreModule.forRoot({user: userReducer}),
+    EffectsModule.forRoot([GeocodingEffects]),  // XXX TODO root list effects
     StoreDevtoolsModule.instrument()  // XXX TODO disable in prod
   ],
   providers: [],

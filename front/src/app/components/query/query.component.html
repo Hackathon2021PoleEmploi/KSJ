@@ -4,7 +4,7 @@
       <mat-label>Adresse</mat-label>
       <input matInput [(ngModel)]="address" (keydown.enter)="search()">
     </mat-form-field>
-    
+
     <mat-form-field class="form-field">
       <mat-label>Vos arbres allergènes (séparés par des virgules)</mat-label>
       <input matInput [(ngModel)]="allergies" (ngModelChange)="updateAllergies()">
@@ -17,5 +17,8 @@
     <button mat-raised-button class="button-search" (click)="search()">
       Rechercher
     </button>
+  </div>
+  <div *ngIf="isGeocoding$ | async">
+    Recherche de l'adresse en cours... TODO spinner
   </div>
 </div>
