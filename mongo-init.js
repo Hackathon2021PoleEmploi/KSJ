@@ -10,3 +10,6 @@ db.createUser(
         ]
     }
 );
+db.createCollection('Trees');
+db.getCollection('Trees').createIndex( { "geometry" : "2dsphere" } );
+db.getCollection('Trees').createIndex( { "properties.titre": "text" } );
