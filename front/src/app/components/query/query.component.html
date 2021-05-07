@@ -2,22 +2,22 @@
   <div class="form">
     <mat-form-field class="form-field">
       <mat-label>Adresse</mat-label>
-      <input matInput [(ngModel)]="address" (keydown.enter)="search()">
+      <input matInput [(ngModel)]="address" (keydown.enter)="search()" (focusout)="search()">
     </mat-form-field>
 
-    <mat-form-field class="example-chip-list">
+    <mat-form-field style="width: 250px;">
       <mat-label>Vos arbres allergènes</mat-label>
       <mat-chip-list #chipList>
         <mat-chip
-          *ngFor="let fruit of fruits"
+          *ngFor="let a of allergies"
           [selectable]="selectable"
           [removable]="removable"
-          (removed)="remove(fruit)">
-          {{fruit}}
+          (removed)="remove(a)">
+          {{a}}
           <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
         </mat-chip>
         <input
-          placeholder="New fruit..."
+          placeholder="Nouvelle allergie..."
           #fruitInput
           [formControl]="fruitCtrl"
           [matAutocomplete]="auto"
@@ -26,7 +26,7 @@
           (matChipInputTokenEnd)="add($event)">
       </mat-chip-list>
       <mat-autocomplete #auto="matAutocomplete" (optionSelected)="selected($event)">
-        <mat-option *ngFor="let a of genres$ | async" [value]="a">
+        <mat-option *ngFor="let a of allAllergies" [value]="a">
           {{a}}
         </mat-option>
       </mat-autocomplete>
