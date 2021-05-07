@@ -1,0 +1,38 @@
+<div class="center-align">
+    <form class="form" [formGroup]="coordsForm">
+        <mat-form-field class="full-width">
+            <mat-label>Latitude</mat-label>
+            <input type="text" matInput formControlName="latitude" [formControl]="latitudeFormControl"
+                [errorStateMatcher]="matcher" placeholder="Latitude">
+            <mat-error *ngIf="latitudeFormControl.hasError('minlength') && !latitudeFormControl.hasError('required')">
+                La latitude est <strong>incorrecte</strong>
+            </mat-error>
+            <button mat-button *ngIf="getFormValue('latitude')" matSuffix mat-icon-button aria-label="Clear"
+                (click)="unsetFormValue('latitude')">
+                <mat-icon>close</mat-icon>
+            </button>
+        </mat-form-field>
+        <mat-form-field class="full-width">
+            <mat-label>Longitude</mat-label>
+            <input type="text" matInput formControlName="longitude" [formControl]="longitudeFormControl"
+                [errorStateMatcher]="matcher" placeholder="Longitude">
+            <mat-error *ngIf="longitudeFormControl.hasError('minlength') && !longitudeFormControl.hasError('required')">
+                La longitude est <strong>incorrecte</strong>
+            </mat-error>
+            <button mat-button *ngIf="getFormValue('longitude')" matSuffix mat-icon-button aria-label="Clear"
+                (click)="unsetFormValue('longitude')">
+                <mat-icon>close</mat-icon>
+            </button>
+        </mat-form-field>
+
+        <mat-form-field class="full-width">
+            <mat-select placeholder="Arbre à signaler">
+                <!-- <mat-option *ngFor="let tree of trees" [value]="tree.value">
+                    {{ tree.name }}
+                </mat-option> -->
+            </mat-select>
+        </mat-form-field>
+
+        <button mat-button class="alert-button">Signaler</button>
+    </form>
+</div>

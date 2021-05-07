@@ -1,0 +1,20 @@
+.center-align {
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.size {
+    min-width: 150px;
+    max-width: 500px;
+}
+
+h1.center {
+    margin-top: 1em;
+    text-align: center;
+    font-family: 'Press Start 2P', cursive;
+}
+
+img {
+    width: 100%;
+}

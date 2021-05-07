@@ -1,14 +1,14 @@
 <div class="center-align">
     <form class="form" [formGroup]="loginForm">
         <mat-form-field class="full-width">
-            <mat-label>Email</mat-label>
+            <mat-label>E-mail</mat-label>
             <input type="email" matInput formControlName="email" [formControl]="emailFormControl"
-                [errorStateMatcher]="matcher" placeholder="Ex. pat@example.com">
+                [errorStateMatcher]="matcher" placeholder="Ex. utilisateur@exemple.com">
             <mat-error *ngIf="emailFormControl.hasError('email') && !emailFormControl.hasError('required')">
-                Please enter a valid email address
+                Merci d'entrer une adresse e-mail valide
             </mat-error>
             <mat-error *ngIf="emailFormControl.hasError('required')">
-                Email is <strong>required</strong>
+                L'e-mail est <strong>requis</strong>
             </mat-error>
             <button mat-button *ngIf="getFormValue('email')" matSuffix mat-icon-button aria-label="Clear"
                 (click)="unsetFormValue('email')">
@@ -17,19 +17,20 @@
         </mat-form-field>
 
         <mat-form-field class="full-width">
-            <mat-label>Password</mat-label>
+            <mat-label>Mot de passe</mat-label>
             <input type="password" matInput formControlName="password" [formControl]="passwordFormControl"
                 [errorStateMatcher]="matcher" placeholder="Password">
             <mat-error *ngIf="passwordFormControl.hasError('minlength') && !passwordFormControl.hasError('required')">
-                Password need at least minimum size of <strong>12 characters</strong>
+                Le mote de passe doit être d'une taille minimum de <strong>12 charactères</strong>
             </mat-error>
             <mat-error *ngIf="passwordFormControl.hasError('required')">
-                Password is <strong>required</strong>
+                Le mot de passe est <strong>requis</strong>
             </mat-error>
             <button mat-button *ngIf="getFormValue('password')" matSuffix mat-icon-button aria-label="Clear"
                 (click)="unsetFormValue('password')">
                 <mat-icon>close</mat-icon>
             </button>
         </mat-form-field>
+        <button mat-button class="login-button">Se connecter</button>
     </form>
 </div>

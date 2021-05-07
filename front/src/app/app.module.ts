@@ -13,16 +13,19 @@ import { MatIconModule } from '@angular/material/icon'
 import { MatToolbarModule } from '@angular/material/toolbar'
 import { MatTooltipModule  } from '@angular/material/tooltip'
 import { MatButtonModule } from '@angular/material/button'
+import { MatSelectModule } from '@angular/material/select'
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { LoginComponent } from './components/login/login.component';
 import { HomeComponent } from './components/home/home.component';
 import { MapComponent } from './components/map/map.component'
+import { AlertComponent } from './components/alert/alert.component';
 import { NgxMapboxGLModule } from 'ngx-mapbox-gl';
 import { StoreModule } from '@ngrx/store';
 import { userReducer } from './store/reducers/user.reducer';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { EffectsModule } from '@ngrx/effects';
 import { GeocodingEffects } from './store/effects/geocoding.effects';
+import { NotfoundComponent } from './components/notfound/notfound.component';
 
 @NgModule({
   declarations: [
@@ -30,7 +33,9 @@ import { GeocodingEffects } from './store/effects/geocoding.effects';
     QueryComponent,
     MapComponent,
     LoginComponent,
-    HomeComponent
+    HomeComponent,
+    AlertComponent,
+    NotfoundComponent
   ],
   imports: [
     BrowserModule,
@@ -44,6 +49,7 @@ import { GeocodingEffects } from './store/effects/geocoding.effects';
     MatToolbarModule,
     MatTooltipModule,
     MatButtonModule,
+    MatSelectModule,
     FormsModule,
     ReactiveFormsModule,
     MatIconModule,

@@ -1,6 +1,7 @@
 /* You can add global styles to this file, and also import other style files */
 @import "~mapbox-gl/dist/mapbox-gl.css";
 @import "~@mapbox/mapbox-gl-geocoder/lib/mapbox-gl-geocoder.css";
+@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
 
 :host {
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica,
@@ -38,6 +39,8 @@ app-home {
   flex: 1;
 }
 
-app-login {
+app-login,
+app-notfound,
+app-alert {
   height: 100%;
 }
