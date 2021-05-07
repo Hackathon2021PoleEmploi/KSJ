@@ -44,7 +44,7 @@ namespace MoulinetteArbres
         {
             foreach (Tree tree in someTree)
             {
-                var httpWebRequest = (HttpWebRequest)WebRequest.Create("https://back.traefik.me:4443/api/trees");
+                var httpWebRequest = (HttpWebRequest)WebRequest.Create("http://back.traefik.me/api/trees");
                 httpWebRequest.ContentType = "application/json";
                 httpWebRequest.Method = "POST";
 
