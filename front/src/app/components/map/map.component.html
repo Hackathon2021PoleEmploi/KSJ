@@ -5,6 +5,8 @@
     [center]="[3.87048, 43.610476]"
     (load)="map = $event"
     [cursorStyle]="cursorStyle"
+    [fitBounds]="boundingBox"
+    [fitBoundsOptions]="fitBoundsOptions"
   >
     <mgl-geojson-source
         id="user-position"
